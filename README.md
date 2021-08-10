@@ -1,4 +1,4 @@
-# Swarm Tile Library and Breakout Board
+# Swarm Tile Library
 
 This repository contains an Arduino library to integrate the Swarm Tile. Swarm is a satellite network designed for low-cost IoT communication. 
 
