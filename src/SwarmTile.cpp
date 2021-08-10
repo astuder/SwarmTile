@@ -1,5 +1,5 @@
 
-#include "tilelib.h"
+#include "SwarmTile.h"
 #include "Arduino.h"
 #include <time.h>
 #include <stdlib.h>

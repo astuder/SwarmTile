@@ -118,12 +118,12 @@ public:
 
     tile_status_t begin();
     void setTimeout(uint16_t timeout_ms);   // timeout in milliseconds, ~65 seconds max should suffice
-    void setDebugStream(Stream *debug);   // stream for debug output
+    void setDebugStream(Stream *debug);     // stream for debug output
 
-    bool isReady(); // returns true when Tile is ready (boot complete)
-    bool isReadyToSend(); // returns true when Tile is ready to send messages (acquired date/time)
+    bool isReady();         // returns true when Tile is ready (boot complete)
+    bool isReadyToSend();   // returns true when Tile is ready to send messages (acquired date/time)
 
-    const char* getErrorStr();      // returns error string in case of a TILE_COMMAND_ERROR
+    const char* getErrorStr();  // returns error string in case of a TILE_COMMAND_ERROR
 
     tile_status_t getVersion(tile_version_t &version);
     tile_status_t getConfig(tile_config_t &config);

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include "munit/munit.h"
-#include "tilelib.h"
+#include "SwarmTile.h"
 #include "SerialEmu.h"
 #include "TileEmu.h"
 
