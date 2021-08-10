@@ -1,0 +1,44 @@
+# Datatypes (KEYWORD1)
+
+SwarmTile	KEYWORD1
+tile_status_t	KEYWORD1
+tile_version_t	KEYWORD1
+tile_sleep_t	KEYWORD1
+tile_config_t	KEYWORD1
+tile_datetime_t	KEYWORD1
+tile_geo_data_t	KEYWORD1
+tile_msg_count_t	KEYWORD1
+tile_send_msg_t	KEYWORD1
+tile_read_msg_t	KEYWORD1
+
+# Methods and Functions (KEYWORD2)
+
+begin	KEYWORD2
+setTimeout	KEYWORD2
+isReady	KEYWORD2
+getVersion	KEYWORD2
+getConfig	KEYWORD2
+setGpioMode	KEYWORD2
+sleep	KEYWORD2
+wake	KEYWORD2
+powerOff	KEYWORD2
+getDateTime	KEYWORD2
+getGeoData	KEYWORD2
+getUnsentCount	KEYWORD2
+getUnreadCount	KEYWORD2
+deleteUnsentMsgs	KEYWORD2
+deleteReadMsgs	KEYWORD2
+sendMessage	KEYWORD2
+readMessage	KEYWORD2
+getErrorStr	KEYWORD2
+
+# Structures (KEYWORD3)
+
+# Constants (LITERAL1)
+
+TILE_SUCCESS	LITERAL1
+TILE_TIMEOUT	LITERAL1
+TILE_PROTOCOL_ERROR	LITERAL1
+TILE_COMMAND_ERROR	LITERAL1
+TILE_RX_OVERFLOW	LITERAL1
+TILE_NO_GPS_FIX	LITERAL1
