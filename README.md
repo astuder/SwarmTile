@@ -47,7 +47,7 @@ tbd
 
 # Known Issues
 
-## Wakeup immediatly after Sleep
+## Wakeup immediately after Sleep
 
 The Tile takes a few seconds to enter sleep mode. Calling `Wakeup` is to soon after `Sleep` may result in confusing error messages. 
 

@@ -7,7 +7,7 @@
  * It then checks every 30 seconds if the message was sent and whether there was a
  * message received. Any received message will be printed.
  * 
- * The sketch assumes that the tile is connected to Serial3. Change this as needed.
+ * The sketch assumes that the tile is connected to Serial1. Change this as needed.
  */
 
 #define TileSerial Serial1  // serial port connected to the tile
