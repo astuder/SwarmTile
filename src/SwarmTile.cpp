@@ -433,6 +433,13 @@ tile_status_t SwarmTile::sendMessage(tile_send_msg_t &send_msg)
 
     _sendBegin();
     _send("$TD ");
+    if (send_msg.app_id != 0) {
+        // only supported with Tile FW v1.1.0+
+        // add version check?
+        _send("AI=");
+        _send(ltoa(send_msg.app_id, num_buf, 10));
+        _send(',');
+    }
     if (send_msg.hold_time > 0) {
         _send("HD=");
         _send(ltoa(send_msg.hold_time, num_buf, 10));

@@ -76,6 +76,7 @@ typedef struct {
     // input
     const char *message;    // pointer to message to be sent
     uint16_t msg_len;       // length of message (1-192)
+    uint16_t app_id;        // app id to send with message, set to 0 if not used or if Tile FW is pre v1.1.0
     uint32_t hold_time;     // time in seconds before unsent msg is discarded (60-172800), set to 0 if not used
     tile_datetime_t expiration; // UTC time when unsent msgs is discarded, ignored if epxiration.valid != true or hold_time > 0
     // output
@@ -106,7 +107,7 @@ typedef struct {
 
 typedef struct {
     // output
-    uint32_t app_id;        // application ID (always 0 for Tile fw v1.1.0+)
+    uint16_t app_id;        // application ID (always 0 for Tile fw v1.1.0+)
     uint32_t device_id;     // device ID
     char device_type[16];   // device type name
     bool valid;

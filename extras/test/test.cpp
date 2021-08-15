@@ -392,6 +392,18 @@ static MunitResult test_sendMessage(const MunitParameter params[], void* data)
     munit_assert_true(send.valid);
     munit_assert(send.msg_id == (uint64_t) 5354468575855);
 
+    // send a message with app id
+    memset(&send, 0, sizeof(send));
+    send.message = test_msg;
+    send.msg_len = strlen(test_msg);
+    send.app_id = 1000;
+    tile_emu_begin("$TD AI=1000,68656c6c6f20776f726c64", "$TD OK,5354468575855");
+    result = tile.sendMessage(send);
+    tile_emu_end(result);
+    munit_assert_int(result, ==, TILE_SUCCESS);
+    munit_assert_true(send.valid);
+    munit_assert(send.msg_id == (uint64_t) 5354468575855);
+
     // send a message with hold time
     memset(&send, 0, sizeof(send));
     send.message = test_msg;
