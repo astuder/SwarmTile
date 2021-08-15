@@ -49,7 +49,7 @@ tbd
 
 ## Wakeup immediately after Sleep
 
-The Tile takes a few seconds to enter sleep mode. Calling `Wakeup` is to soon after `Sleep` may result in confusing error messages. 
+The Tile takes a few seconds to enter sleep mode. Calling `Wakeup` to soon after `Sleep` may result in confusing error messages. 
 
 To avoid this error, sleep for 20 seconds or longer.
 
