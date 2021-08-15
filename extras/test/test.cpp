@@ -77,13 +77,23 @@ static MunitResult test_getConfig(const MunitParameter params[], void* data)
     tile_status_t result;
     tile_config_t config;
 
-    // get firmware version
+    // get configuration (pre v1.1.0)
     tile_emu_begin("$CS", "$CS AI=1999,DI=0x00051b,DN=TILE");
     result = tile.getConfig(config);
     tile_emu_end(result);
     munit_assert_int(result, ==, TILE_SUCCESS);
     munit_assert_true(config.valid);
     munit_assert_int(config.app_id, ==, 1999);
+    munit_assert_int(config.device_id, ==, 0x51b);
+    munit_assert_string_equal(config.device_type, "TILE");
+
+    // get configuration (v1.1.0+)
+    tile_emu_begin("$CS", "$CS DI=0x00051b,DN=TILE");
+    result = tile.getConfig(config);
+    tile_emu_end(result);
+    munit_assert_int(result, ==, TILE_SUCCESS);
+    munit_assert_true(config.valid);
+    munit_assert_int(config.app_id, ==, 0);
     munit_assert_int(config.device_id, ==, 0x51b);
     munit_assert_string_equal(config.device_type, "TILE");
 
