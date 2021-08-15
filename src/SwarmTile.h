@@ -89,6 +89,7 @@ typedef struct {
     uint16_t msg_max;       // length of provided buffer, incoming msgs can be up to 192 bytes
     tile_order_t order;     // message to be read (TILE_OLDEST or TILE_NEWEST)
     // output
+    uint16_t app_id;        // app id of the received message (always 0 for Tile fw pre v1.1.0)
     uint64_t msg_id;        // id of the received message
     uint16_t msg_len;       // number of bytes in received message
     tile_datetime_t timestamp;  // UTC time when message was received
@@ -105,7 +106,7 @@ typedef struct {
 
 typedef struct {
     // output
-    uint32_t app_id;        // application ID
+    uint32_t app_id;        // application ID (always 0 for Tile fw v1.1.0+)
     uint32_t device_id;     // device ID
     char device_type[16];   // device type name
     bool valid;

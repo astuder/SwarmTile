@@ -509,9 +509,15 @@ tile_status_t SwarmTile::readMessage(tile_read_msg_t &read_msg)
     }
 
     if (result == TILE_SUCCESS) {
-        if (_rx_field_count == 3) {
+        if (_rx_field_count >= 3) {
+            uint8_t f = 0;  // fields before message field
+            // handle App ID field received with v1.1.0+
+            if (strncmp(_rx_fields[1], "AI=", 3) == 0) {
+                read_msg.app_id = _strToUInt(_rx_fields[1]+3, strlen(_rx_fields[1])-3);
+                f += 1;
+            }
             // unpack message
-            const char *hexstr = _rx_fields[1];
+            const char *hexstr = _rx_fields[f+1];
             uint16_t i = 0;
             uint16_t j = 0;
             while (hexstr[i] != 0 && j < read_msg.msg_max) {
@@ -520,8 +526,8 @@ tile_status_t SwarmTile::readMessage(tile_read_msg_t &read_msg)
                 j++;
             }
             read_msg.msg_len = j;
-            read_msg.msg_id = _strToUInt(_rx_fields[2], strlen(_rx_fields[2]));
-            _makeDatetime(read_msg.timestamp, _strToUInt(_rx_fields[3], strlen(_rx_fields[3])));
+            read_msg.msg_id = _strToUInt(_rx_fields[f+2], strlen(_rx_fields[f+2]));
+            _makeDatetime(read_msg.timestamp, _strToUInt(_rx_fields[f+3], strlen(_rx_fields[f+3])));
             read_msg.valid = true;
             return TILE_SUCCESS;
         }

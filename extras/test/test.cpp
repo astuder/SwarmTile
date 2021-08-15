@@ -449,7 +449,7 @@ static MunitResult test_readMessage(const MunitParameter params[], void* data)
     const uint16_t msg_buf_len = 192;
     char msg_buf[msg_buf_len];
 
-    // read newest message
+    // read newest message (FW pre-v1.1.0)
     memset(&read, 0, sizeof(read));
     memset(msg_buf, 0, sizeof(msg_buf));
     read.message = msg_buf;
@@ -463,6 +463,28 @@ static MunitResult test_readMessage(const MunitParameter params[], void* data)
     munit_assert_string_equal(read.message, "example message");
     munit_assert_int(read.msg_len, ==, 15);
     munit_assert(read.msg_id == 21990235111426);
+    munit_assert_int(read.timestamp.year, ==, 2020);
+    munit_assert_int(read.timestamp.month, ==, 3);
+    munit_assert_int(read.timestamp.day, ==, 18);
+    munit_assert_int(read.timestamp.hour, ==, 1);
+    munit_assert_int(read.timestamp.minute, ==, 17);
+    munit_assert_int(read.timestamp.second, ==, 55);
+
+    // read newest message (FW v1.1.0+)
+    memset(&read, 0, sizeof(read));
+    memset(msg_buf, 0, sizeof(msg_buf));
+    read.message = msg_buf;
+    read.msg_max = msg_buf_len;
+    read.order = TILE_NEWEST;
+    tile_emu_begin("$MM R=N", "$MM AI=1234,6578616d706c65206d657373616765,21990235111426,1584494275");
+    result = tile.readMessage(read);
+    tile_emu_end(result);
+    munit_assert_int(result, ==, TILE_SUCCESS);
+    munit_assert_true(read.valid);
+    munit_assert_string_equal(read.message, "example message");
+    munit_assert_int(read.msg_len, ==, 15);
+    munit_assert(read.msg_id == 21990235111426);
+    munit_assert_int(read.app_id, ==, 1234);
     munit_assert_int(read.timestamp.year, ==, 2020);
     munit_assert_int(read.timestamp.month, ==, 3);
     munit_assert_int(read.timestamp.day, ==, 18);
