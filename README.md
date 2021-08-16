@@ -1,12 +1,14 @@
 # Swarm Tile Library
 
-This repository contains an Arduino library to integrate the Swarm Tile. Swarm is a satellite network designed for low-cost IoT communication. 
+This is an Arduino library to integrate with the Swarm Tile module.
 
-**Note: This project is not affiliated with Swarm Technologies Inc. This library is NOT developed, supported or endorsed by Swarm Technologies Inc.**
+Swarm is a satellite network designed for low-cost IoT communication. The Swarm Tile satellite data modem transmits and receives data to and from Swarm’s space network and is designed to be embedded into a third-party product.
+
+**Note: This library is NOT developed, supported or endorsed by Swarm Technologies Inc. Please open a GitHub issue if you need help with this library.**
 
 # Documentation
 
-tbd
+See `Examples` > `SwarmTile` > `BasicSendReceive` for usage of the simplified API.
 
 ```
     SwarmTile(Stream &str);
