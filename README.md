@@ -4,6 +4,8 @@ This is an Arduino library to integrate with the Swarm Tile module.
 
 Swarm is a satellite network designed for low-cost IoT communication. The Swarm Tile satellite data modem transmits and receives data to and from Swarm’s space network and is designed to be embedded into a third-party product.
 
+This library supports `TILE01` firmware `v1.1.0` and was tested with Tile firmware `v1.0.0`.
+
 **Note: This library is NOT developed, supported or endorsed by Swarm Technologies Inc. Please open a GitHub issue if you need help with this library.**
 
 # Documentation
@@ -49,14 +51,22 @@ See `Examples` > `SwarmTile` > `BasicSendReceive` for usage of the simplified AP
 
 # Known Issues
 
-## Wakeup immediately after Sleep
+## Receiving of messages is unverified (#5)
 
-The Tile takes a few seconds to enter sleep mode. Calling `Wakeup` to soon after `Sleep` may result in confusing error messages. 
+We weren't able to verify receiving of messages in the real world. Please let us know if you successfully used `readMessage()`.
+
+## Firmware version v1.1.0 is unverified (#4)
+
+We weren't able to verify this library against a Tile with firmware v1.1.0. Please let us know if you successfully used this library with that firmware version.
+
+## Wakeup immediately after Sleep (#3)
+
+The Tile takes a few seconds to enter sleep mode. Calling `wake()` to soon after `sleep()` may result in confusing error messages. 
 
 To avoid this error, sleep for 20 seconds or longer.
 
-## DBXTOHIVEFULL
+## DBXTOHIVEFULL (#2)
 
-With Tile FW 1.0.0, the example code sometimes puts the Tile into a state where `sendMessage` returns with a `DBXTOHIVEFULL` error.
+With Tile FW 1.0.0, the example code sometimes puts the Tile into a state where `sendMessage()` returns with a `DBXTOHIVEFULL` error.
 
 To resolve this error send the following command to the Tile: `$RS dbinit*3d`
