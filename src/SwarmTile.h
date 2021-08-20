@@ -149,6 +149,8 @@ public:
     uint16_t deleteReadMsgs();
     tile_status_t sendMessage(const char* str);
     tile_status_t sendMessage(const char* buf, uint16_t len);
+    tile_status_t sendMessage(uint16_t app_id, const char* str);     // requires FW v1.1.0+    
+    tile_status_t sendMessage(uint16_t app_id, const char* buf, uint16_t len);   // requires FW v1.1.0+
     uint16_t readMessage(char* buf, uint16_t buf_len, tile_order_t = TILE_OLDEST);
 
 private:

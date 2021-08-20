@@ -4,7 +4,7 @@ This is an Arduino library to integrate with the Swarm Tile module.
 
 Swarm is a satellite network designed for low-cost IoT communication. The Swarm Tile satellite data modem transmits and receives data to and from Swarm’s space network and is designed to be embedded into a third-party product.
 
-This library supports `TILE01` firmware `v1.1.0` and was tested with Tile firmware `v1.0.0`.
+This library supports `TILE01` running firmware `v1.0.0` or newer.
 
 **Note: This library is NOT developed, supported or endorsed by Swarm Technologies Inc. Please open a GitHub issue if you need help with this library.**
 
@@ -46,6 +46,8 @@ See `Examples` > `SwarmTile` > `BasicSendReceive` for usage of the simplified AP
     uint16_t deleteReadMsgs();
     tile_status_t sendMessage(const char* str);
     tile_status_t sendMessage(const char* buf, uint16_t len);
+    tile_status_t sendMessage(uint16_t app_id, const char* str);     // requires FW v1.1.0+    
+    tile_status_t sendMessage(uint16_t app_id, const char* buf, uint16_t len);   // requires FW v1.1.0+
     uint16_t readMessage(char* buf, uint16_t buf_len, tile_order_t = TILE_OLDEST);
 ```
 

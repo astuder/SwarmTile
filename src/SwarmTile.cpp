@@ -491,6 +491,26 @@ tile_status_t SwarmTile::sendMessage(const char* buf, uint16_t len)
     return sendMessage(msg);
 }
 
+tile_status_t SwarmTile::sendMessage(uint16_t app_id, const char* str)
+{
+    tile_send_msg_t msg;
+    memset(&msg, 0, sizeof(msg));
+    msg.app_id = app_id;
+    msg.message = str;
+    msg.msg_len = strlen(str);
+    return sendMessage(msg);
+}
+
+tile_status_t SwarmTile::sendMessage(uint16_t app_id, const char* buf, uint16_t len)
+{
+    tile_send_msg_t msg;
+    memset(&msg, 0, sizeof(msg));
+    msg.app_id = app_id;
+    msg.message = buf;
+    msg.msg_len = len;
+    return sendMessage(msg);
+}
+
 tile_status_t SwarmTile::readMessage(tile_read_msg_t &read_msg)
 {
     tile_status_t result;

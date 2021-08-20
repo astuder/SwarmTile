@@ -381,6 +381,30 @@ static MunitResult test_sendMessage(const MunitParameter params[], void* data)
     const char *test_msg = "hello world";
     tile_send_msg_t send;
 
+    // send message as string using simplified API
+    tile_emu_begin("$TD 68656c6c6f20776f726c64", "$TD OK,5354468575855");
+    result = tile.sendMessage(test_msg);
+    tile_emu_end(result);
+    munit_assert_int(result, ==, TILE_SUCCESS);
+
+    // send message as string with app_id using simplified API
+    tile_emu_begin("$TD AI=1000,68656c6c6f20776f726c64", "$TD OK,5354468575855");
+    result = tile.sendMessage(1000, test_msg);
+    tile_emu_end(result);
+    munit_assert_int(result, ==, TILE_SUCCESS);
+
+    // send message as buffer using simplified API
+    tile_emu_begin("$TD 68656c6c6f20776f726c64", "$TD OK,5354468575855");
+    result = tile.sendMessage(test_msg, strlen(test_msg));
+    tile_emu_end(result);
+    munit_assert_int(result, ==, TILE_SUCCESS);
+
+    // send message as buffer with app_id using simplified API
+    tile_emu_begin("$TD AI=1000,68656c6c6f20776f726c64", "$TD OK,5354468575855");
+    result = tile.sendMessage(1000, test_msg, strlen(test_msg));
+    tile_emu_end(result);
+    munit_assert_int(result, ==, TILE_SUCCESS);
+
     // send a message with no (default) hold or expiration time
     memset(&send, 0, sizeof(send));
     send.message = test_msg;
@@ -460,6 +484,21 @@ static MunitResult test_readMessage(const MunitParameter params[], void* data)
     tile_read_msg_t read;
     const uint16_t msg_buf_len = 192;
     char msg_buf[msg_buf_len];
+    uint16_t read_len;
+
+    // read oldest message with simplified API
+    memset(&msg_buf, 0, sizeof(msg_buf));
+    tile_emu_begin("$MM R=O", "$MM 6578616d706c65206d657373616765,21990235111426,1584494275");
+    read_len = tile.readMessage(msg_buf, msg_buf_len);
+    if (read_len > 0) {
+        result = TILE_SUCCESS;
+    } else {
+        result = TILE_COMMAND_ERROR;
+    }
+    tile_emu_end(result);
+    munit_assert_int(result, ==, TILE_SUCCESS);
+    munit_assert_int(read_len, ==, strlen("example message"));
+    munit_assert_string_equal(msg_buf, "example message");
 
     // read newest message (FW pre-v1.1.0)
     memset(&read, 0, sizeof(read));
