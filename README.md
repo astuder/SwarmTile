@@ -57,10 +57,6 @@ See `Examples` > `SwarmTile` > `BasicSendReceive` for usage of the simplified AP
 
 We weren't able to verify receiving of messages in the real world. Please let us know if you successfully used `readMessage()`.
 
-## Firmware version v1.1.0 is unverified
-
-We weren't able to verify this library against a Tile with firmware v1.1.0. Please let us know if you successfully used this library with that firmware version.
-
 ## Wakeup immediately after Sleep
 
 The Tile takes a few seconds to enter sleep mode. Calling `wake()` to soon after `sleep()` may result in confusing error messages. 
@@ -69,6 +65,8 @@ To avoid this error, sleep for 20 seconds or longer.
 
 ## DBXTOHIVEFULL
 
-With Tile FW 1.0.0, the example code sometimes puts the Tile into a state where `sendMessage()` returns with a `DBXTOHIVEFULL` error.
+With Tile FW 1.0.0 and 0.9.7, the example code sometimes puts the Tile into a state where `sendMessage()` returns with a `DBXTOHIVEFULL` error.
 
 To resolve this error send the following command to the Tile: `$RS dbinit*3d`
+
+This issue is resolved with Tile FW 1.1.0 and newer.
